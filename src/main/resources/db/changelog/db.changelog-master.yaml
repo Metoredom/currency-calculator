@@ -1,0 +1,4 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/db.changelog-master.yaml
+  - include:
+      file: classpath:/db/changelog/v1/2024-10-05-init-tables.yaml

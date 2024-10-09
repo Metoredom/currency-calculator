@@ -1,0 +1,73 @@
+databaseChangeLog:
+  - changeSet:
+      id: init-fees-table
+      author: mbarbashov
+      changes:
+        - createTable:
+            tableName: "fees"
+            columns:
+              - column:
+                  name: "id"
+                  type: "BIGINT"
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: "from_currency"
+                  type: "VARCHAR(255)"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "to_currency"
+                  type: "VARCHAR(255)"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "fee_fraction"
+                  type: "DOUBLE"
+                  constraints:
+                    nullable: false
+        - addUniqueConstraint:
+            tableName: "fees"
+            columnNames: "from_currency, to_currency"
+            constraintName: "uk_fees_from_currency_to_currency"
+        - createIndex:
+            tableName: "fees"
+            indexName: "idx_fees_from_currency_to_currency"
+            columns:
+              - column:
+                  name: "from_currency"
+              - column:
+                  name: "to_currency"
+  - changeSet:
+      id: init-rates-table
+      author: mbarbashov
+      changes:
+        - createTable:
+            tableName: "rates"
+            columns:
+              - column:
+                  name: "id"
+                  type: "BIGINT"
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: "code"
+                  type: "VARCHAR(255)"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "rate"
+                  type: "DOUBLE"
+                  constraints:
+                    nullable: false
+        - createIndex:
+            tableName: "rates"
+            indexName: "idx_rates_code"
+            columns:
+              - column:
+                  name: "code"
+            unique: true

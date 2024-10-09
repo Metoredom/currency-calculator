@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:${POSTGRES_PORT}/testdb
+    username: test
+    password: test
+  liquibase:
+    url: jdbc:postgresql://localhost:${POSTGRES_PORT}/testdb
+    user: test
+    password: test
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+    databasePlatform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        default_schema: public
+  data:
+    redis:
+      host: localhost
+      port: ${REDIS_PORT}
+
+application:
+  fees:
+    default_fraction: ${APP_DEFAULT_FEE_FRACTION:0.01}
